@@ -9,12 +9,8 @@ def fibonacci(n: int):
     next: int = 1
 
     for _ in range(3, n + 1):
-        print(last)
-        print(next)
-        last, next = next, next + last
 
-        print(last)
-        print(next)
+        last, next = next, next + last
 
     return next
 
