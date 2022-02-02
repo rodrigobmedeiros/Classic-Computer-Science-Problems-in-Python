@@ -1,2 +1,3 @@
-# problemas-praticos-ciencia-computacao-python
-Repositorio para notas e exercicios do livro Problemas Classicos da Ciencia da Computação com Python
+# Classic Computer Science Problems in Python
+
+Repo used to include notes and exercises of the book Classic Computer Science Problems in Python
