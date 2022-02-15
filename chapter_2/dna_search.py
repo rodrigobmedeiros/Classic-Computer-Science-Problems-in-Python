@@ -9,8 +9,6 @@ Nucleotide: IntEnum = IntEnum('Nucleotide', ('A', 'C', 'G', 'T'))
 # As IntEnum is callable we can create as showed above (like namedtuples) or
 # like bellow:
 
-nucleotide: Nucleotide = Nucleotide
-
 class Nucleotide(IntEnum):
 
     A = 1
@@ -19,3 +17,22 @@ class Nucleotide(IntEnum):
     T = 4
 
 # In this case the class is used directly.
+
+Codon = Tuple[Nucleotide, Nucleotide, Nucleotide] # Codon is a combination of three Nucleotides
+Gene = List[Codon] # Gene is a list of codons
+
+teste: str = 'ABCDEFGHI'
+
+def string_to_gene(gene: str) -> Gene:
+
+    for nuc_group in range(0, len(gene), 3):
+
+        codon: Codon = (
+            gene[nuc_group],
+            gene[nuc_group + 1], 
+            gene[nuc_group + 2]
+        )
+
+        print(codon)
+
+string_to_gene(teste)
