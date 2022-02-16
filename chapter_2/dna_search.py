@@ -1,7 +1,7 @@
 from enum import IntEnum 
 from typing import Tuple, List 
 
-Nucleotide: IntEnum = IntEnum('Nucleotide', ('A', 'C', 'G', 'T'))
+
 
 # How IntEnum works?
 # It's a variation of Enum where the created class is subclass of int too.
@@ -9,6 +9,10 @@ Nucleotide: IntEnum = IntEnum('Nucleotide', ('A', 'C', 'G', 'T'))
 # As IntEnum is callable we can create as showed above (like namedtuples) or
 # like bellow:
 
+# 1° implementation of IntEnum subclass
+Nucleotide: IntEnum = IntEnum('Nucleotide', ('A', 'C', 'G', 'T'))
+
+# 2° implementation of IntEnum subclass
 class Nucleotide(IntEnum):
 
     A = 1
@@ -18,13 +22,14 @@ class Nucleotide(IntEnum):
 
 # In this case the class is used directly.
 
+# Remember that it's a type definition
 Codon = Tuple[Nucleotide, Nucleotide, Nucleotide] # Codon is a combination of three Nucleotides
 Gene = List[Codon] # Gene is a list of codons
 
-gene_str: str = 'ACGTGGCTCTCTAACGTACGTACGTACGGGGTTTATATATACCCTAGGACTCCCTTT'
-
 def string_to_gene(gene_str: str) -> Gene:
-
+    """
+    Convert gene information from strings into Gene Type.
+    """
     gene: Gene = []
 
     for nuc_group in range(0, len(gene_str), 3):
@@ -43,8 +48,26 @@ def string_to_gene(gene_str: str) -> Gene:
 
     return gene
 
+def linear_search(gene: Gene, codon: Codon) -> bool:
+    """
+    Linear search implementation, to look for a codon into a gene.
+    """
+    for current_codon in gene:
+
+        if current_codon == codon:
+
+            return True 
+
+    return False
+
+gene_str: str = 'ACGTGGCTCTCTAACGTACGTACGTACGGGGTTTATATATACCCTAGGACTCCCTTT'
 gene: Gene = string_to_gene(gene_str)
 
-for g in gene:
+codon_to_search: Codon = (
+    Nucleotide['G'],
+    Nucleotide['G'],
+    Nucleotide['G']
+)
 
-    print(f'{g[0].name}-{g[1].name}-{g[2].name}')
+is_codon_in_gene: bool = linear_search(gene, codon_to_search)
+print(is_codon_in_gene)
