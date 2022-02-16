@@ -21,18 +21,30 @@ class Nucleotide(IntEnum):
 Codon = Tuple[Nucleotide, Nucleotide, Nucleotide] # Codon is a combination of three Nucleotides
 Gene = List[Codon] # Gene is a list of codons
 
-teste: str = 'ABCDEFGHI'
+gene_str: str = 'ACGTGGCTCTCTAACGTACGTACGTACGGGGTTTATATATACCCTAGGACTCCCTTT'
 
-def string_to_gene(gene: str) -> Gene:
+def string_to_gene(gene_str: str) -> Gene:
 
-    for nuc_group in range(0, len(gene), 3):
+    gene: Gene = []
+
+    for nuc_group in range(0, len(gene_str), 3):
+
+        if (nuc_group + 2) >= len(gene_str):
+            
+            return gene
 
         codon: Codon = (
-            gene[nuc_group],
-            gene[nuc_group + 1], 
-            gene[nuc_group + 2]
+            Nucleotide[gene_str[nuc_group]],
+            Nucleotide[gene_str[nuc_group + 1]], 
+            Nucleotide[gene_str[nuc_group + 2]]
         )
 
-        print(codon)
+        gene.append(codon)
 
-string_to_gene(teste)
+    return gene
+
+gene: Gene = string_to_gene(gene_str)
+
+for g in gene:
+
+    print(f'{g[0].name}-{g[1].name}-{g[2].name}')
