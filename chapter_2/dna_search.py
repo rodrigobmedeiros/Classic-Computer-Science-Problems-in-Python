@@ -64,9 +64,9 @@ gene_str: str = 'ACGTGGCTCTCTAACGTACGTACGTACGGGGTTTATATATACCCTAGGACTCCCTTT'
 gene: Gene = string_to_gene(gene_str)
 
 codon_to_search: Codon = (
-    Nucleotide['G'],
-    Nucleotide['G'],
-    Nucleotide['G']
+    Nucleotide.G,
+    Nucleotide.G,
+    Nucleotide.G
 )
 
 is_codon_in_gene: bool = linear_search(gene, codon_to_search)
